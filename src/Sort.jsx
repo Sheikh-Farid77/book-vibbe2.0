@@ -3,7 +3,7 @@ export default function Sort(){
         <div className="flex items-stretch space-x-3">
             
             <select
-              className="cursor-pointer rounded-md border px-4 py-2 text-center text-gray-600"
+              className="cursor-pointer rounded-md px-4 py-2 text-center bg-white text-gray-600"
               name="sortBy"
               id="sortBy"
             >

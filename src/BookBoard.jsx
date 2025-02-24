@@ -113,7 +113,7 @@ export default function BookBoard() {
           <Sort></Sort>
         </div>
       </section>
-      <AllBooks></AllBooks>
+      <AllBooks books={books}></AllBooks>
     </main>
   );
 }
