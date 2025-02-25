@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function Search({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearch = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     onSearch(searchTerm);
   };
   return (
@@ -20,7 +20,7 @@ export default function Search({ onSearch }) {
             <input
               type="search"
               value={searchTerm}
-              onChange={(e) =>setSearchTerm(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value)}
               id="search-dropdown"
               className="z-20 block w-full bg-white px-4 py-2.5 pr-10 text-[#1C4336] placeholder:text-[#1C4336] focus:outline-none"
               placeholder="Search Book"

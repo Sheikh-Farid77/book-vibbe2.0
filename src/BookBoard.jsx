@@ -7,7 +7,7 @@ export default function BookBoard() {
   const bookLists = [
     {
       id: 1,
-      bookName: "JavaScript: The Good Parts",
+      bookName: "JavaScript: Good Parts",
       writerName: "Douglas Crockford",
       price: 25.99,
       isFavorite: false,
@@ -104,6 +104,7 @@ export default function BookBoard() {
   ];
 
   const [books, setBooks] = useState(bookLists);
+  const [sortValue, setSortValue] = useState("");
 
   const handleSearch = (searchTerm) => {
     const searchBooks = books.filter((book) =>
@@ -112,20 +113,50 @@ export default function BookBoard() {
     setBooks([...searchBooks]);
   };
 
-  const handleFavorite = (bookId)=>{
-    const index = books.findIndex(book => book.id === bookId);
+  const handleFavorite = (bookId) => {
+    const index = books.findIndex((book) => book.id === bookId);
 
     const newBook = [...books];
     newBook[index].isFavorite = !newBook[index].isFavorite;
-    setBooks(newBook)
-  }
+    setBooks(newBook);
+  };
+
+  const handleSort = (value) => {
+    if (value === "name_asc") {
+      const aToZ = [...books].sort((a, b) =>
+        a.bookName.localeCompare(b.bookName)
+      );
+      setBooks(aToZ);
+      setSortValue(value);
+    } else if (value === "name_desc") {
+      const zToA = [...books].sort((a, b) =>
+        b.bookName.localeCompare(a.bookName)
+      );
+      setBooks(zToA);
+      setSortValue(value);
+    } else if (value === "year_asc") {
+      const ascending = [...books].sort(
+        (a, b) => a.publishYear - b.publishYear
+      );
+      setBooks(ascending);
+      setSortValue(value);
+    } else if (value === "year_desc") {
+      const descending = [...books].sort(
+        (a, b) => b.publishYear - a.publishYear
+      );
+      setBooks(descending);
+      setSortValue(value);
+    } else {
+      setBooks(books);
+    }
+  };
 
   return (
     <main className="my-10 lg:my-14">
       <section className="mb-8 lg:mb-10 mx-auto max-w-7xl">
         <div className="mx-auto flex items-end justify-between max-md:max-w-[95%] max-md:flex-col max-md:items-start max-md:space-y-4">
           <Search onSearch={handleSearch}></Search>
-          <Sort></Sort>
+          <Sort onSort={handleSort} sortValue={sortValue}></Sort>
         </div>
       </section>
       <AllBooks books={books} onFav={handleFavorite}></AllBooks>
