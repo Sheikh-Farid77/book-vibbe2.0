@@ -10,7 +10,7 @@ export default function BookBoard() {
       bookName: "JavaScript: The Good Parts",
       writerName: "Douglas Crockford",
       price: 25.99,
-      isFavorite: true,
+      isFavorite: false,
       publishYear: 2008,
     },
     {
@@ -26,7 +26,7 @@ export default function BookBoard() {
       bookName: "You Don't Know JS",
       writerName: "Kyle Simpson",
       price: 28.99,
-      isFavorite: true,
+      isFavorite: false,
       publishYear: 2014,
     },
     {
@@ -34,7 +34,7 @@ export default function BookBoard() {
       bookName: "Clean Code",
       writerName: "Robert C. Martin",
       price: 35.0,
-      isFavorite: true,
+      isFavorite: false,
       publishYear: 2008,
     },
     {
@@ -50,7 +50,7 @@ export default function BookBoard() {
       bookName: "JavaScript: The Definitive Guide",
       writerName: "David Flanagan",
       price: 45.99,
-      isFavorite: true,
+      isFavorite: false,
       publishYear: 2020,
     },
     {
@@ -66,7 +66,7 @@ export default function BookBoard() {
       bookName: "Refactoring: Improving the Design of Existing Code",
       writerName: "Martin Fowler",
       price: 42.0,
-      isFavorite: true,
+      isFavorite: false,
       publishYear: 1999,
     },
     {
@@ -74,7 +74,7 @@ export default function BookBoard() {
       bookName: "The Clean Coder",
       writerName: "Robert C. Martin",
       price: 29.99,
-      isFavorite: true,
+      isFavorite: false,
       publishYear: 2011,
     },
     {
@@ -90,7 +90,7 @@ export default function BookBoard() {
       bookName: "Cracking the Coding Interview",
       writerName: "Gayle Laakmann McDowell",
       price: 37.99,
-      isFavorite: true,
+      isFavorite: false,
       publishYear: 2008,
     },
     {
@@ -112,6 +112,14 @@ export default function BookBoard() {
     setBooks([...searchBooks]);
   };
 
+  const handleFavorite = (bookId)=>{
+    const index = books.findIndex(book => book.id === bookId);
+
+    const newBook = [...books];
+    newBook[index].isFavorite = !newBook[index].isFavorite;
+    setBooks(newBook)
+  }
+
   return (
     <main className="my-10 lg:my-14">
       <section className="mb-8 lg:mb-10 mx-auto max-w-7xl">
@@ -120,7 +128,7 @@ export default function BookBoard() {
           <Sort></Sort>
         </div>
       </section>
-      <AllBooks books={books}></AllBooks>
+      <AllBooks books={books} onFav={handleFavorite}></AllBooks>
     </main>
   );
 }
